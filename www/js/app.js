@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic', 'ioniApp'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -29,6 +29,44 @@ angular.module('starter', ['ionic'])
     url:'/inicio',
     templateUrl:'templates/inicio.html'
   })
+  .state('home',{
+    url:'/home',
+    templateUrl:'templates/home.html',
+    controller: 'homeCtrl'
+  })
+  .state('author',{
+    url:'/author',
+    templateUrl:'templates/author.html',
+    controller: 'authorCtrl'
+  })
+  .state('ibiblioteca',{
+    url:'/ibiblioteca',
+    templateUrl:'templates/ibiblioteca.html',
+    controller: 'ibibliotecaCtrl'
+  })
+  .state('curriculum',{
+    url:'/curriculum',
+    templateUrl:'templates/curriculum.html',
+    controller: 'curriculumCtrl'
+  })
 $urlRouterProvider.otherwise('/inicio');
 
-});
+})
+
+.factory('bookService', function() {     
+var books = [       
+{ title: 'La colmena', year: '1951', author: 'Camilo José Cela Trulock',          isbn: '843992688X', editorial: 'Anaya', cover: 'lacolmena.jpg' }, 
+{ title: 'La galatea', year: '1585', author: 'Miguel de Cervantes Saavedra',          isbn: '0936388110', editorial: 'Anaya', cover: 'lagalatea.jpg' },       
+{ title: 'El ingenioso hidalgo don Quijote de la Mancha', year: '1605',          author: 'Miguel de Cervantes Saavedra',          isbn: '0844273619', editorial: 'Anaya', cover: 'donquijote.jpg' },       
+{ title: 'La dorotea', year: '1632', author: 'Félix Lope de Vega y Carpio',          isbn: '847039360X', editorial: 'Anaya', cover: 'ladorotea.jpg' },       
+{ title: 'La dragontea', year: '1602', author: 'Félix Lope de Vega y Carpio',          isbn: '8437624045', editorial: 'Anaya', cover: 'ladragontea.jpg' }     
+];     
+  return {         
+    getBooks: function() {             
+      return books;         
+    },         
+    getBook: function(id) {             
+      return books[id];         
+    },     
+  } 
+}); 
